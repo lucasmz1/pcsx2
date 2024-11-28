@@ -103,8 +103,8 @@ jobs:
           wget https://apt.llvm.org/llvm.sh
           chmod +x llvm.sh
           sudo ./llvm.sh 17
-          tools/retry.sh wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
-          sudo tools/retry.sh apt-add-repository -n 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main'
+          #tools/retry.sh wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+          #sudo tools/retry.sh apt-add-repository -n 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main'
           sudo tools/retry.sh apt-get update
           sudo tools/retry.sh apt-get -y install \
             meson libwayland-dev wayland-protocols libpango1.0-dev libdbus-1-dev libegl-dev libopengl-dev libxkbcommon-dev\
