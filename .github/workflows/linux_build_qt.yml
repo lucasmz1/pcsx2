@@ -102,7 +102,10 @@ jobs:
         run: |
           sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -y
           sudo apt update
-          
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa -y
+          sudo apt update
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+          sudo apt update
           wget -c 'https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip'
           unzip ninja-linux.zip
           sudo mv ninja /usr/bin/
@@ -118,6 +121,7 @@ jobs:
           #sudo tools/retry.sh apt-add-repository -n 'deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-17 main'
           sudo tools/retry.sh apt-get update
           sudo tools/retry.sh apt-get -y install \
+            g++-13 gcc-13 libstdc++6 libc++-dev libc++abi-dev \
             libwayland-dev libpipewire-0.3-dev wayland-protocols libpango1.0-dev libdbus-1-dev libegl-dev libopengl-dev libxkbcommon-dev\
             build-essential ccache cmake curl extra-cmake-modules git libasound2-dev libaio-dev libavcodec-dev libavformat-dev libavutil-dev \
             libcurl4-openssl-dev libdbus-1-dev libegl-dev libevdev-dev libfontconfig-dev libfreetype-dev libfuse2 libgtk-3-dev libgudev-1.0-dev \
