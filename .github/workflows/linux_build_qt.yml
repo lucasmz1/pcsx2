@@ -162,10 +162,16 @@ jobs:
             -DCMAKE_PREFIX_PATH="$HOME/deps" \
             -DCMAKE_C_COMPILER=clang-18 \
             -DCMAKE_CXX_COMPILER=clang++-18 \
-            -DCMAKE_EXE_LINKER_FLAGS_INIT="-fuse-ld=lld" \
-            -DCMAKE_MODULE_LINKER_FLAGS_INIT="-fuse-ld=lld" \
+            #-DCMAKE_EXE_LINKER_FLAGS_INIT="-fuse-ld=lld" \
+            #-DCMAKE_MODULE_LINKER_FLAGS_INIT="-fuse-ld=lld" \
+            -DCMAKE_EXE_LINKER_FLAGS_INIT="-02 -fPIC"
+            -DCMAKE_MODULE_LINKER_FLAGS_INIT="-02 -fPIC"
             -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-            -DENABLE_SETCAP=OFF \
+            -DENABLE_SETCAP=ON \
+            -DCMAKE_BUILD_STRIP=ON \
+            -DUSE_SYSTEM_FMT=OFF \
+            -DENABLE_TESTS=OFF \
+            -DXDG_STD=ON \
             -DDISABLE_ADVANCE_SIMD=TRUE \
             $ADDITIONAL_CMAKE_ARGS
 
