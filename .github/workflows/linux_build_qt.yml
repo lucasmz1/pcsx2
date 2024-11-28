@@ -120,6 +120,13 @@ jobs:
             meson build --buildtype release
             sudo meson install -C build
             cd ..
+            git clone https://github.com/freetype/freetype.git
+            cd freetype
+            meson setup build
+            cd build
+            meson compile
+            sudo meson install
+            cd ${{ github.workspace }}
 
       - name: Cache Dependencies
         id: cache-deps
