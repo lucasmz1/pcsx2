@@ -100,6 +100,9 @@ jobs:
 
       - name: Install Packages
         run: |
+          wget -c 'https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip'
+          unzip ninja-linux.zip
+          sudo mv ninja /usr/bin/
           wget -c 'https://github.com/mesonbuild/meson/releases/download/1.6.0/meson-1.6.0.tar.gz'
           tar xvf meson-1.6.0.tar.gz
           cd ./meson-1.6.0/
@@ -119,7 +122,7 @@ jobs:
             libwayland-dev libx11-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-cursor-dev libxcb-damage0-dev libxcb-glx0-dev libxcb-icccm4-dev \
             libxcb-image0-dev libxcb-keysyms1-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev \
             libxcb-shm0-dev libxcb-sync-dev libxcb-util-dev libxcb-xfixes0-dev libxcb-xinput-dev libxcb-xkb-dev libxext-dev libxkbcommon-x11-dev libxrandr-dev \
-            lld-17 llvm-17 ninja-build patchelf pkg-config zlib1g-dev
+            lld-17 llvm-17 patchelf pkg-config zlib1g-dev
             git clone https://github.com/deepin-community/libdecor-0.git
             cd libdecor-0/
             meson build --buildtype release
