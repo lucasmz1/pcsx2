@@ -216,6 +216,7 @@ find "$OUTDIR/usr/lib/" -iname 'libgio**' -delete
 find "$OUTDIR/usr/lib/" -iname 'libmount**' -delete
 cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 "$OUTDIR/usr/lib/"
 cp "${GITHUB_WORKSPACE}/scripts/AppRun" "$OUTDIR/"
+chmod +x "$OUTDIR/AppRun"
 rm -f "$NAME.AppImage"
 ARCH=x86_64 VERSION="2.2.0" "$APPIMAGETOOL" -s "$OUTDIR" && mv ./*.AppImage "$NAME.AppImage"
 
