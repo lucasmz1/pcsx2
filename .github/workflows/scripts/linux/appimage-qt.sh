@@ -201,17 +201,17 @@ for hookpath in "$SCRIPTDIR/apprun-hooks"/*; do
 	sed -i -e 's/exec /source "$this_dir"\/apprun-hooks\/"'"$hookname"'"\nexec /' "$OUTDIR/AppRun"
 done
 
-echo "Generating AppImage..."
-GIT_VERSION=$(git tag --points-at HEAD)
+#echo "Generating AppImage..."
+#GIT_VERSION=$(git tag --points-at HEAD)
 
-if [[ "${GIT_VERSION}" == "" ]]; then
+#if [[ "${GIT_VERSION}" == "" ]]; then
 	# In the odd event that we run this script before the release gets tagged.
-	GIT_VERSION=$(git describe --tags)
-	if [[ "${GIT_VERSION}" == "" ]]; then
-		GIT_VERSION=$(git rev-parse HEAD)
-	fi
-fi
+	#GIT_VERSION=$(git describe --tags)
+	#if [[ "${GIT_VERSION}" == "" ]]; then
+		#GIT_VERSION=$(git rev-parse HEAD)
+	#fi
+#fi
 
 rm -f "$NAME.AppImage"
-ARCH=x86_64 VERSION="${GIT_VERSION}" "$APPIMAGETOOL" -s "$OUTDIR" && mv ./*.AppImage "$NAME.AppImage"
+ARCH=x86_64 VERSION="2.2.0" "$APPIMAGETOOL" -s "$OUTDIR" && mv ./*.AppImage "$NAME.AppImage"
 
