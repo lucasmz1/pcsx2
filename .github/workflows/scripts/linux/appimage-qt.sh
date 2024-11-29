@@ -211,7 +211,11 @@ done
 		#GIT_VERSION=$(git rev-parse HEAD)
 	#fi
 #fi
-
+find "$OUTDIR/usr/lib/" -iname 'libgdk_pixbuf-2.0**' -delete
+find "$OUTDIR/usr/lib/" -iname 'libgio**' -delete
+find "$OUTDIR/usr/lib/" -iname 'libmount**' -delete
+cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 "$OUTDIR/usr/lib/"
+cp "${GITHUB_WORKSPACE}/scripts/AppRun" "$OUTDIR/"
 rm -f "$NAME.AppImage"
 ARCH=x86_64 VERSION="2.2.0" "$APPIMAGETOOL" -s "$OUTDIR" && mv ./*.AppImage "$NAME.AppImage"
 
