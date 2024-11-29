@@ -218,7 +218,6 @@ find "$OUTDIR/usr/lib/" -iname 'libglib-2.0.so**' -delete
 find "$OUTDIR/usr/lib/" -iname 'libgmodule-2.0.so**' -delete
 cp -Ra /usr/share/mime/ "$OUTDIR/usr/share/"
 cp -Ra /usr/share/icons/ "$OUTDIR/usr/share/"
-find "$OUTDIR/usr/share/icons/" -type d | xargs -i -t -exec gtk-update-icon-cache "$OUTDIR/usr/share/icons/"
 export XDG_DATA_DIRS="$OUTDIR/usr/share/:$OUTDIR/usr/share/mime"
 update-mime-database "$OUTDIR/usr/share/mime"
 cp /usr/lib/x86_64-linux-gnu/libstdc++.so.6 "$OUTDIR/usr/lib/"
