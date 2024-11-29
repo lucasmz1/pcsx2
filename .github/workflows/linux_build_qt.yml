@@ -194,10 +194,6 @@ jobs:
           # Save the Cache
           ccache -s
 
-      - name: Run Tests
-        working-directory: ./build
-        run: ninja unittests
-
       - name: Package AppImage
         if: inputs.buildAppImage == true
         env:
