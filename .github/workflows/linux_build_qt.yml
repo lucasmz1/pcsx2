@@ -216,5 +216,5 @@ jobs:
           automatic_release_tag: continuous-stable
           prerelease: false
           draft: false
-          files: $GITHUB_WORKSPACE/ci-artifacts/*.AppImage*
+          files: /home/runner/work/pcsx2/pcsx2/ci-artifacts/*.AppImage*
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
