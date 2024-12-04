@@ -209,3 +209,12 @@ jobs:
         with:
           name: ${{ steps.artifact-metadata.outputs.artifact-name }}
           path: ci-artifacts
+      - name: release
+        uses: "marvinpinto/action-automatic-releases@6273874b61ebc8c71f1a61b2d98e234cf389b303"
+        with:
+          title: Continuous build
+          automatic_release_tag: continuous-stable
+          prerelease: false
+          draft: false
+          files: $GITHUB_WORKSPACE/ci-artifacts/*.AppImage*
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
