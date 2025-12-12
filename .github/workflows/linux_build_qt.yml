@@ -166,6 +166,7 @@ jobs:
           ADDITIONAL_CMAKE_ARGS: ${{ inputs.cmakeflags }}
         run: |
           cmake -B build -G Ninja \
+            -DENABLE_SSE2=ON \
             -DCMAKE_C_FLAGS="-march=x86-64 -mtune=generic" \
             -DCMAKE_CXX_FLAGS="-march=x86-64 -mtune=generic" \
             -DCMAKE_BUILD_TYPE=Release \
