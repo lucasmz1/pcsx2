@@ -166,9 +166,8 @@ jobs:
           ADDITIONAL_CMAKE_ARGS: ${{ inputs.cmakeflags }}
         run: |
           cmake -B build -G Ninja \
-            -DDISABLE_ADVANCE_SIMD=ON \
-            -DCMAKE_C_FLAGS="-mno-sse4.1 -mno-sse4.2 -march=x86-64" \
-            -DCMAKE_CXX_FLAGS="-mno-sse4.1 -mno-sse4.2 -march=x86-64" \
+            -DCMAKE_C_FLAGS="-march=x86-64" \
+            -DCMAKE_CXX_FLAGS="-march=x86-64" \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
             -DCMAKE_PREFIX_PATH="$HOME/deps" \
