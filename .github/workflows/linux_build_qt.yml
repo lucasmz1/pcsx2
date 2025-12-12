@@ -166,8 +166,8 @@ jobs:
           ADDITIONAL_CMAKE_ARGS: ${{ inputs.cmakeflags }}
         run: |
           cmake -B build -G Ninja \
-            -DCMAKE_C_FLAGS="-march=x86-64" \
-            -DCMAKE_CXX_FLAGS="-march=x86-64" \
+            -DCMAKE_C_FLAGS="-march=x86-64 -mtune=generic" \
+            -DCMAKE_CXX_FLAGS="-march=x86-64 -mtune=generic" \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
             -DCMAKE_PREFIX_PATH="$HOME/deps" \
@@ -181,7 +181,7 @@ jobs:
             -DUSE_SYSTEM_FMT=OFF \
             -DENABLE_TESTS=OFF \
             -DXDG_STD=ON \
-            -DDISABLE_ADVANCE_SIMD=TRUE \
+            -DDISABLE_ADVANCE_SIMD=ON \
             $ADDITIONAL_CMAKE_ARGS
 
       - name: Build PCSX2
