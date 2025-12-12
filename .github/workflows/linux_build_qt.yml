@@ -12,7 +12,7 @@ on:
       os:
         required: false
         type: string
-        default: ubuntu-20.04
+        default: ubuntu-22.04
       platform:
         required: false
         type: string
@@ -166,6 +166,7 @@ jobs:
           ADDITIONAL_CMAKE_ARGS: ${{ inputs.cmakeflags }}
         run: |
           cmake -B build -G Ninja \
+            -DDISABLE_ADVANCE_SIMD=ON \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
             -DCMAKE_PREFIX_PATH="$HOME/deps" \
