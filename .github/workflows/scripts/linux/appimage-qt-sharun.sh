@@ -87,5 +87,5 @@ cp -a "$BUILDDIR/bin/resources" "$OUTDIR/bin"
 rm -fr "$OUTDIR/bin/translations" "$OUTDIR/translations"
 cp -a "$BUILDDIR/bin/translations" "$OUTDIR/bin"
 wget -q -O appimagetool "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
-ARCH=x86_64 VERSION="2.2.0" ./appimagetool -n "$OUTDIR" && mv ./*.AppImage "$NAME.AppImage"
+ARCH=x86_64 VERSION="2.2.0" ./appimagetool -n "$OUTDIR" && mv ./*.AppImage "PCSX2-sharun.AppImage"
 
