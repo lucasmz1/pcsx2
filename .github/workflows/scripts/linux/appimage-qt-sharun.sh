@@ -33,15 +33,15 @@ sudo apt install xvfb
 mkdir AppDir
 OUTDIR=./AppDir
 
-echo "Copying desktop file..."
-cp "$PCSX2DIR/.github/workflows/scripts/linux/pcsx2-qt.desktop" "$OUTDIR/net.pcsx2.PCSX2.desktop"
-cp "$PCSX2DIR/bin/resources/icons/AppIconLarge.png" "$OUTDIR/PCSX2.png"
 cd $OUTDIR
+find / -iname "AppIconLarge.png" | xargs -i -t -exec cp {} .
+mv AppIconLarge.png PCSX2.png
 wget -O "sharun" "https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64"
+wget -O "net.pcsx2.PCSX2.desktop" https://github.com/lucasmz1/pcsx2/blob/master/.github/workflows/scripts/linux/pcsx2-qt.desktop
 chmod +x ./sharun
 xvfb-run -- ./sharun l -p -v -e -k "$BUILDDIR/bin/pcsx2-qt"
-ln $SHARUN AppRun
-./AppRun -g
+ln ./sharun AppRun
+./sharun -g
 cd ..
 echo "Copying resources into AppDir..."
 cp -a "$BUILDDIR/bin/resources" "$OUTDIR/bin"
