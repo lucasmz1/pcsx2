@@ -33,50 +33,13 @@ sudo apt install xvfb
 mkdir AppDir
 OUTDIR=./AppDir
 
-# Using go-appimage
-# Backported from https://github.com/stenzek/duckstation/pull/3251
-
-echo "Locating extra libraries..."
-EXTRA_LIBS_ARGS=""
-for lib in "${MANUAL_LIBS[@]}"; do
-	srcpath=$(find "$DEPSDIR" -name "$lib")
-	if [ ! -f "$srcpath" ]; then
-		echo "Missinge extra library $lib. Exiting."
-		exit 1
-	fi
-
-	echo "Found $lib at $srcpath."
-
-	if [ "$EXTRA_LIBS_ARGS" == "" ]; then
-		EXTRA_LIBS_ARGS="--library=$srcpath"
-	else
-		EXTRA_LIBS_ARGS="$EXTRA_LIBS_ARGS,$srcpath"
-	fi
-done
-
-# Why the nastyness? linuxdeploy strips our main binary, and there's no option to turn it off.
-# It also doesn't strip the Qt libs. We can't strip them after running linuxdeploy, because
-# patchelf corrupts the libraries (but they still work), but patchelf+strip makes them crash
-# on load. So, make a backup copy, strip the original (since that's where linuxdeploy finds
-# the libs to copy), then swap them back after we're done.
-# Isn't Linux packaging amazing?
-
-rm -fr "$DEPSDIR.bak"
-cp -a "$DEPSDIR" "$DEPSDIR.bak"
-IFS="
-"
-for i in $(find "$DEPSDIR" -iname '*.so'); do
-  echo "Stripping deps library ${i}"
-  strip "$i"
-done
-
 echo "Copying desktop file..."
 cp "$PCSX2DIR/.github/workflows/scripts/linux/pcsx2-qt.desktop" "$OUTDIR/net.pcsx2.PCSX2.desktop"
 cp "$PCSX2DIR/bin/resources/icons/AppIconLarge.png" "$OUTDIR/PCSX2.png"
 cd $OUTDIR
 wget -O "sharun" "https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64"
 chmod +x ./sharun
-xvfb-run -- ./sharun l -p -v -e -k "$BUILDDIR/bin/pcsx2-qt" $EXTRA_LIBS_ARGS
+xvfb-run -- ./sharun l -p -v -e -k "$BUILDDIR/bin/pcsx2-qt"
 ln $SHARUN AppRun
 ./AppRun -g
 cd ..
