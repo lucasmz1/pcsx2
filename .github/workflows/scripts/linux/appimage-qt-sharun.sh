@@ -30,17 +30,11 @@ SCRIPTDIR=$(dirname "${BASH_SOURCE[0]}")
 
 set -e
 sudo apt install xvfb
-APPIMAGETOOL=./appimagetool-x86_64
 mkdir AppDir
 OUTDIR=./AppDir
 
 # Using go-appimage
 # Backported from https://github.com/stenzek/duckstation/pull/3251
-if [ ! -f "$APPIMAGETOOL" ]; then
-	APPIMAGETOOLURL=$(wget -q https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage)
-	wget -O "$APPIMAGETOOL" "$APPIMAGETOOLURL"
-	chmod +x "$APPIMAGETOOL"
-fi
 
 echo "Locating extra libraries..."
 EXTRA_LIBS_ARGS=""
@@ -92,6 +86,6 @@ cp -a "$BUILDDIR/bin/resources" "$OUTDIR/bin"
 # Fix up translations.
 rm -fr "$OUTDIR/bin/translations" "$OUTDIR/translations"
 cp -a "$BUILDDIR/bin/translations" "$OUTDIR/bin"
-
-ARCH=x86_64 VERSION="2.2.0" "$APPIMAGETOOL" -n "$OUTDIR" && mv ./*.AppImage "$NAME.AppImage"
+wget -q -O appimagetool "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
+ARCH=x86_64 VERSION="2.2.0" ./appimagetool -n "$OUTDIR" && mv ./*.AppImage "$NAME.AppImage"
 
