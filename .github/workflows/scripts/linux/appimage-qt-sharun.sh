@@ -86,6 +86,8 @@ cp "$PCSX2DIR/.github/workflows/scripts/linux/pcsx2-qt.desktop" "net.pcsx2.PCSX2
 cp "$PCSX2DIR/bin/resources/icons/AppIconLarge.png" "PCSX2.png"
 cd $OUTDIR
 $SHARUN l -p -v -e -k "$BUILDDIR/bin/pcsx2-qt" $EXTRA_LIBS_ARGS
+ln $SHARUN AppRun
+./AppRun -g
 cd ..
 echo "Copying resources into AppDir..."
 cp -a "$BUILDDIR/bin/resources" "$OUTDIR/bin"
