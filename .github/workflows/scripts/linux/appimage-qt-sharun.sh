@@ -37,7 +37,6 @@ OUTDIR=./AppDir
 
 if [ ! -f "$SHARUN" ]; then
 	wget -O "$OUTDIR/$SHARUN" https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64
-	chmod +x "$SHARUN"
 fi
 
 # Using go-appimage
@@ -86,6 +85,7 @@ echo "Copying desktop file..."
 cp "$PCSX2DIR/.github/workflows/scripts/linux/pcsx2-qt.desktop" "net.pcsx2.PCSX2.desktop"
 cp "$PCSX2DIR/bin/resources/icons/AppIconLarge.png" "PCSX2.png"
 cd $OUTDIR
+chmod +x ./sharun
 xvfb-run -- ./sharun l -p -v -e -k "$BUILDDIR/bin/pcsx2-qt" $EXTRA_LIBS_ARGS
 ln $SHARUN AppRun
 ./AppRun -g
