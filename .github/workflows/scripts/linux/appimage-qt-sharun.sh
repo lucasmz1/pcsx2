@@ -36,7 +36,8 @@ mkdir AppDir
 OUTDIR=./AppDir
 
 if [ ! -f "$SHARUN" ]; then
-	wget -O "$OUTDIR/$SHARUN" https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64
+	wget -O "$SHARUN" "https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64"
+	mv "$SHARUN" "$OUTDIR"
 fi
 
 # Using go-appimage
@@ -82,8 +83,8 @@ for i in $(find "$DEPSDIR" -iname '*.so'); do
 done
 
 echo "Copying desktop file..."
-cp "$PCSX2DIR/.github/workflows/scripts/linux/pcsx2-qt.desktop" "net.pcsx2.PCSX2.desktop"
-cp "$PCSX2DIR/bin/resources/icons/AppIconLarge.png" "PCSX2.png"
+cp "$PCSX2DIR/.github/workflows/scripts/linux/pcsx2-qt.desktop" "$OUTDIR/net.pcsx2.PCSX2.desktop"
+cp "$PCSX2DIR/bin/resources/icons/AppIconLarge.png" "$OUTDIR/PCSX2.png"
 cd $OUTDIR
 chmod +x ./sharun
 xvfb-run -- ./sharun l -p -v -e -k "$BUILDDIR/bin/pcsx2-qt" $EXTRA_LIBS_ARGS
