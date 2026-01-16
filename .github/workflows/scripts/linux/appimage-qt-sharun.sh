@@ -30,15 +30,9 @@ SCRIPTDIR=$(dirname "${BASH_SOURCE[0]}")
 
 set -e
 sudo apt install xvfb
-SHARUN=./sharun
 APPIMAGETOOL=./appimagetool-x86_64
 mkdir AppDir
 OUTDIR=./AppDir
-
-if [ ! -f "$SHARUN" ]; then
-	wget -O "$SHARUN" "https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64"
-	mv "$SHARUN" "$OUTDIR"
-fi
 
 # Using go-appimage
 # Backported from https://github.com/stenzek/duckstation/pull/3251
@@ -86,6 +80,7 @@ echo "Copying desktop file..."
 cp "$PCSX2DIR/.github/workflows/scripts/linux/pcsx2-qt.desktop" "$OUTDIR/net.pcsx2.PCSX2.desktop"
 cp "$PCSX2DIR/bin/resources/icons/AppIconLarge.png" "$OUTDIR/PCSX2.png"
 cd $OUTDIR
+wget -O "sharun" "https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64"
 chmod +x ./sharun
 xvfb-run -- ./sharun l -p -v -e -k "$BUILDDIR/bin/pcsx2-qt" $EXTRA_LIBS_ARGS
 ln $SHARUN AppRun
