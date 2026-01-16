@@ -29,13 +29,14 @@ SCRIPTDIR=$(dirname "${BASH_SOURCE[0]}")
 
 
 set -e
+sudo apt install xvfb
 SHARUN=./sharun
 APPIMAGETOOL=./appimagetool-x86_64
 mkdir AppDir
 OUTDIR=./AppDir
 
 if [ ! -f "$SHARUN" ]; then
-	"$PCSX2DIR/tools/retry.sh" wget -O "$OUTDIR/$SHARUN" https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64
+	wget -O "$OUTDIR/$SHARUN" https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64
 	chmod +x "$SHARUN"
 fi
 
@@ -43,7 +44,7 @@ fi
 # Backported from https://github.com/stenzek/duckstation/pull/3251
 if [ ! -f "$APPIMAGETOOL" ]; then
 	APPIMAGETOOLURL=$(wget -q https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage)
-	"$PCSX2DIR/tools/retry.sh" wget -O "$APPIMAGETOOL" "$APPIMAGETOOLURL"
+	wget -O "$APPIMAGETOOL" "$APPIMAGETOOLURL"
 	chmod +x "$APPIMAGETOOL"
 fi
 
@@ -85,7 +86,7 @@ echo "Copying desktop file..."
 cp "$PCSX2DIR/.github/workflows/scripts/linux/pcsx2-qt.desktop" "net.pcsx2.PCSX2.desktop"
 cp "$PCSX2DIR/bin/resources/icons/AppIconLarge.png" "PCSX2.png"
 cd $OUTDIR
-$SHARUN l -p -v -e -k "$BUILDDIR/bin/pcsx2-qt" $EXTRA_LIBS_ARGS
+xvfb-run -- $SHARUN l -p -v -e -k "$BUILDDIR/bin/pcsx2-qt" $EXTRA_LIBS_ARGS
 ln $SHARUN AppRun
 ./AppRun -g
 cd ..
