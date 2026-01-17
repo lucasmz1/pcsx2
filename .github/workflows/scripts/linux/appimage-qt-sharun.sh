@@ -34,21 +34,21 @@ mkdir AppDir
 OUTDIR=./AppDir
 
 cd $OUTDIR
-find / -iname "AppIconLarge.png" | xargs -i -t -exec cp {} .
+find ${GITHUB_WORKSPACE}/install -iname "AppIconLarge.png" | xargs -i -t -exec cp {} .
 mv AppIconLarge.png PCSX2.png
 wget -O "sharun" "https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64"
 wget -O "net.pcsx2.PCSX2.desktop" https://github.com/lucasmz1/pcsx2/blob/master/.github/workflows/scripts/linux/pcsx2-qt.desktop
 chmod +x ./sharun
-xvfb-run -- ./sharun l -p -v -e -k "$BUILDDIR/bin/pcsx2-qt"
+xvfb-run -- ./sharun l -p -v -e -k "${GITHUB_WORKSPACE}/install/bin/pcsx2-qt"
 ln ./sharun AppRun
 ./sharun -g
 cd ..
 echo "Copying resources into AppDir..."
-cp -a "$BUILDDIR/bin/resources" "$OUTDIR/bin"
+cp -a "${GITHUB_WORKSPACE}/install/bin/resources" "$OUTDIR/bin"
 
 # Fix up translations.
 rm -fr "$OUTDIR/bin/translations" "$OUTDIR/translations"
-cp -a "$BUILDDIR/bin/translations" "$OUTDIR/bin"
+cp -a "${GITHUB_WORKSPACE}/install/bin/translations" "$OUTDIR/bin"
 wget -q -O appimagetool "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
 ARCH=x86_64 VERSION="2.2.0" ./appimagetool -n "$OUTDIR" && mv ./*.AppImage "PCSX2-sharun.AppImage"
 
