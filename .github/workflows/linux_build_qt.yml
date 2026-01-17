@@ -143,6 +143,7 @@ jobs:
             cd build
             meson compile
             sudo meson install
+            mkidr ${GITHUB_WORKSPACE}/install
             cd ${{ github.workspace }}
 
       - name: Cache Dependencies
@@ -183,7 +184,8 @@ jobs:
             -DENABLE_TESTS=OFF \
             -DXDG_STD=ON \
             -DDISABLE_ADVANCE_SIMD=ON \
-            $ADDITIONAL_CMAKE_ARGS
+            $ADDITIONAL_CMAKE_ARGS \
+            -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install
 
       - name: Build PCSX2
         working-directory: build
