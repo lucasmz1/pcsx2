@@ -50,18 +50,18 @@ chmod +x ./sharun
 
 # Gerar AppRun com xvfb
 find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t -exec xvfb-run -- ./sharun l -p -v -e -k {}
-ln -sf ./sharun AppRun
+ln ./sharun AppRun
 ./sharun -g
 
 cd ..
 
 echo "Copying resources into AppDir..."
-find ${GITHUB_WORKSPACE}/ -iname 'resources' | xargs -i -t -exec cp -r {} "$OUTDIR/bin"
+find ${GITHUB_WORKSPACE}/ -name 'resources' | xargs -i -t -exec cp -r {} "$OUTDIR/bin"
 
 # Corrigir traduções
 rm -rf "$OUTDIR/bin/translations" "$OUTDIR/translations"
 
-find ${GITHUB_WORKSPACE}/ -iname 'translations' | xargs -i -t -exec cp -r {} "$OUTDIR/bin"
+find ${GITHUB_WORKSPACE}/ -name 'translations' | xargs -i -t -exec cp -r {} "$OUTDIR/bin"
 
 # Baixar appimagetool
 wget -q -O appimagetool "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
