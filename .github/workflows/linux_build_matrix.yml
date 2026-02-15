@@ -1,6 +1,7 @@
 name: 🐧 Linux Builds
 
 on:
+  workflow_dispatch:
   push:
     branches-ignore:
       - "l10n_master"
