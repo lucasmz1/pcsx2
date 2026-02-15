@@ -49,7 +49,7 @@ wget -O "net.pcsx2.PCSX2.desktop" "https://raw.githubusercontent.com/lucasmz1/pc
 chmod +x ./sharun
 
 # Gerar AppRun com xvfb
-find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t -exec ./sharun l -p -v -e -k {}
+find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t -exec xvfb-run -- ./sharun l -p -v -e -k {}
 ln -sf ./sharun AppRun
 ./sharun -g
 
@@ -69,6 +69,3 @@ chmod +x appimagetool
 
 # Criar AppImage
 ARCH=x86_64 VERSION="2.2.0" ./appimagetool -n "$OUTDIR"
-
-# Renomear AppImage final
-find ${GITHUB_WORKSPACE}/ -iname '*.AppImage' | xargs -i -t -exec mv {} "PCSX2-sharun.AppImage"
