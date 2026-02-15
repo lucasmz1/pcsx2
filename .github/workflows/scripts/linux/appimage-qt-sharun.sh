@@ -49,7 +49,7 @@ wget -O "net.pcsx2.PCSX2.desktop" "https://raw.githubusercontent.com/lucasmz1/pc
 chmod +x ./sharun
 
 # Gerar AppRun com xvfb
-xvfb-run -- ./sharun l -p -v -e -k "${GITHUB_WORKSPACE}/install/bin/pcsx2-qt"
+find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t -exec ./sharun l -p -v -e -k {}
 ln -sf ./sharun AppRun
 ./sharun -g
 
