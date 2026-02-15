@@ -50,10 +50,10 @@ chmod +x ./sharun
 
 # Gerar AppRun com xvfb
 find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t -exec xvfb-run -- ./sharun l -p -v -e -k {} /usr/lib/x86_64-linux-gnu/dri/
-mkdir -p "$OUTDIR/shared/lib/qt6" && mv "$OUTDIR/shared/lib/home/runner/deps/plugins" "$OUTDIR/shared/lib/qt6/"
-mv "$OUTDIR/shared/lib/home/runner/deps/lib/*" "$OUTDIR/shared/lib/"
-rm -rf "$OUTDIR/shared/lib/home/*"
-find -iname 'qt.conf' -type f | xargs -i -t -exec cp {} "$OUTDIR/bin/"
+#mkdir -p "$OUTDIR/shared/lib/qt6" && mv "$OUTDIR/shared/lib/home/runner/deps/plugins" "$OUTDIR/shared/lib/qt6/"
+#mv "$OUTDIR/shared/lib/home/runner/deps/lib/*" "$OUTDIR/shared/lib/"
+#rm -rf "$OUTDIR/shared/lib/home/*"
+#find -iname 'qt.conf' -type f | xargs -i -t -exec cp {} "$OUTDIR/bin/"
 ln ./sharun AppRun
 ./sharun -g
 
