@@ -41,7 +41,7 @@ find "${GITHUB_WORKSPACE}/" -iname "AppIconLarge.png" | xargs -i -t cp {} .
 mv AppIconLarge.png PCSX2.png
 
 # Baixar sharun
-wget -O "sharun" "https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64"
+wget -O "sharun" "https://github.com/VHSgunzo/sharun/releases/download/v0.7.9/sharun-x86_64"
 
 # Baixar arquivo .desktop (usar link raw!)
 wget -O "net.pcsx2.PCSX2.desktop" "https://raw.githubusercontent.com/lucasmz1/pcsx2/master/.github/workflows/scripts/linux/pcsx2-qt.desktop"
@@ -49,7 +49,11 @@ wget -O "net.pcsx2.PCSX2.desktop" "https://raw.githubusercontent.com/lucasmz1/pc
 chmod +x ./sharun
 
 # Gerar AppRun com xvfb
-find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t -exec xvfb-run -- ./sharun l -p -v -e -k {}
+find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t -exec xvfb-run -- ./sharun l -p -v -e -k {} /usr/lib/x86_64-linux-gnu/dri/
+mkdir -p "$OUTDIR/shared/lib/qt6" && mv "$OUTDIR/shared/lib/home/runner/deps/plugins" "$OUTDIR/shared/lib/qt6/"
+mv "$OUTDIR/shared/lib/home/runner/deps/lib/*" "$OUTDIR/shared/lib/"
+rm -rf "$OUTDIR/shared/lib/home/*"
+find -iname 'qt.conf' -type f | xargs -i -t -exec cp {} "$OUTDIR/bin/"
 ln ./sharun AppRun
 ./sharun -g
 
