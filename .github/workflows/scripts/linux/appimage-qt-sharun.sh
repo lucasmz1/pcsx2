@@ -68,4 +68,4 @@ wget -q -O appimagetool "https://github.com/AppImage/appimagetool/releases/downl
 chmod +x appimagetool
 
 # Criar AppImage
-ARCH=x86_64 VERSION="2.2.0" ./appimagetool -n "$OUTDIR"
+ARCH=x86_64 ./appimagetool -n "$OUTDIR"
