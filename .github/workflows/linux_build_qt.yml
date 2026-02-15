@@ -143,7 +143,7 @@ jobs:
             cd build
             meson compile
             sudo meson install
-            mkidr ${GITHUB_WORKSPACE}/install
+            mkdir ${GITHUB_WORKSPACE}/install
             cd ${{ github.workspace }}
 
       - name: Cache Dependencies
@@ -221,5 +221,5 @@ jobs:
           automatic_release_tag: continuous-stable
           prerelease: false
           draft: false
-          files: /home/runner/work/pcsx2/pcsx2/ci-artifacts/*.AppImage*
+          files: ${{ github.workspace }}/ci-artifacts/*.AppImage*
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
