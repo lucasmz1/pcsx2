@@ -1,6 +1,7 @@
 name: Windows Build Steps - Qt
 
 on:
+  workflow_dispatch:
   workflow_call:
     inputs:
       jobName:
