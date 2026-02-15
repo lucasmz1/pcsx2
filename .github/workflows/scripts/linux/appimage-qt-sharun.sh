@@ -37,7 +37,7 @@ OUTDIR=./AppDir
 cd "$OUTDIR"
 
 # Copiar ícone
-find "${GITHUB_WORKSPACE}/install" -iname "AppIconLarge.png" | xargs -i -t cp {} .
+find "${GITHUB_WORKSPACE}/" -iname "AppIconLarge.png" | xargs -i -t cp {} .
 mv AppIconLarge.png PCSX2.png
 
 # Baixar sharun
