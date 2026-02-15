@@ -25,30 +25,49 @@
 #
 # For more information, please refer to <http://unlicense.org/>
 
+#!/usr/bin/env bash
+
 SCRIPTDIR=$(dirname "${BASH_SOURCE[0]}")
 
-
 set -e
-sudo apt install xvfb
-mkdir AppDir
+sudo apt install -y xvfb
+mkdir -p AppDir
 OUTDIR=./AppDir
 
-cd $OUTDIR
-find ${GITHUB_WORKSPACE}/install -iname "AppIconLarge.png" | xargs -i -t -exec cp {} .
+cd "$OUTDIR"
+
+# Copiar ícone
+find "${GITHUB_WORKSPACE}/install" -iname "AppIconLarge.png" | xargs -i -t cp {} .
 mv AppIconLarge.png PCSX2.png
+
+# Baixar sharun
 wget -O "sharun" "https://github.com/VHSgunzo/sharun/releases/download/v0.7.8/sharun-x86_64"
-wget -O "net.pcsx2.PCSX2.desktop" https://github.com/lucasmz1/pcsx2/blob/master/.github/workflows/scripts/linux/pcsx2-qt.desktop
+
+# Baixar arquivo .desktop (usar link raw!)
+wget -O "net.pcsx2.PCSX2.desktop" "https://raw.githubusercontent.com/lucasmz1/pcsx2/master/.github/workflows/scripts/linux/pcsx2-qt.desktop"
+
 chmod +x ./sharun
+
+# Gerar AppRun com xvfb
 xvfb-run -- ./sharun l -p -v -e -k "${GITHUB_WORKSPACE}/install/bin/pcsx2-qt"
-ln ./sharun AppRun
+ln -sf ./sharun AppRun
 ./sharun -g
+
 cd ..
+
 echo "Copying resources into AppDir..."
 cp -a "${GITHUB_WORKSPACE}/install/bin/resources" "$OUTDIR/bin"
 
-# Fix up translations.
-rm -fr "$OUTDIR/bin/translations" "$OUTDIR/translations"
+# Corrigir traduções
+rm -rf "$OUTDIR/bin/translations" "$OUTDIR/translations"
 cp -a "${GITHUB_WORKSPACE}/install/bin/translations" "$OUTDIR/bin"
-wget -q -O appimagetool "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
-ARCH=x86_64 VERSION="2.2.0" ./appimagetool -n "$OUTDIR" && mv ./*.AppImage "PCSX2-sharun.AppImage"
 
+# Baixar appimagetool
+wget -q -O appimagetool "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
+chmod +x appimagetool
+
+# Criar AppImage
+ARCH=x86_64 VERSION="2.2.0" ./appimagetool -n "$OUTDIR"
+
+# Renomear AppImage final
+mv ./*.AppImage "PCSX2-sharun.AppImage"
