@@ -71,4 +71,4 @@ chmod +x appimagetool
 ARCH=x86_64 VERSION="2.2.0" ./appimagetool -n "$OUTDIR"
 
 # Renomear AppImage final
-mv ./*.AppImage "PCSX2-sharun.AppImage"
+find ${GITHUB_WORKSPACE}/ -iname '*.AppImage' | xargs -i -t -exec mv {} "PCSX2-sharun.AppImage"
