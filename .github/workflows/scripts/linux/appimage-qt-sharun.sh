@@ -56,11 +56,12 @@ ln -sf ./sharun AppRun
 cd ..
 
 echo "Copying resources into AppDir..."
-cp -a "${GITHUB_WORKSPACE}/install/bin/resources" "$OUTDIR/bin"
+find ${GITHUB_WORKSPACE}/ -iname 'resources' | xargs -i -t -exec cp -r {} "$OUTDIR/bin"
 
 # Corrigir traduções
 rm -rf "$OUTDIR/bin/translations" "$OUTDIR/translations"
-cp -a "${GITHUB_WORKSPACE}/install/bin/translations" "$OUTDIR/bin"
+
+find ${GITHUB_WORKSPACE}/ -iname 'translations' | xargs -i -t -exec cp -r {} "$OUTDIR/bin"
 
 # Baixar appimagetool
 wget -q -O appimagetool "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
