@@ -1,6 +1,7 @@
 name: Linux Build Steps
 
 on:
+  workflow_dispatch:
   workflow_call:
     inputs:
       jobName:
