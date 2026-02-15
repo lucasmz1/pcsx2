@@ -33,6 +33,7 @@ set -e
 sudo apt install -y xvfb
 mkdir -p AppDir
 OUTDIR=./AppDir
+NAME=$4
 
 cd "$OUTDIR"
 
@@ -68,4 +69,4 @@ wget -q -O appimagetool "https://github.com/AppImage/appimagetool/releases/downl
 chmod +x appimagetool
 
 # Criar AppImage
-ARCH=x86_64 ./appimagetool -n "$OUTDIR"
+ARCH=x86_64 ./appimagetool -n "$OUTDIR" "$NAME.AppImage"
