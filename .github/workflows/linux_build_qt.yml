@@ -206,7 +206,7 @@ jobs:
         run: |
           .github/workflows/scripts/linux/appimage-qt-sharun.sh
           mkdir -p "$GITHUB_WORKSPACE"/ci-artifacts/
-          mv "*.AppImage*" "$GITHUB_WORKSPACE"/ci-artifacts/
+          find "$GITHUB_WORKSPACE"/ -iname "*.AppImage*" | xargs -i -t -exec mv {} "$GITHUB_WORKSPACE"/ci-artifacts/
 
       - name: Upload artifact
         if: inputs.buildAppImage == true
