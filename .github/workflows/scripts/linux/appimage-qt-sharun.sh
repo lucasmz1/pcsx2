@@ -49,8 +49,8 @@ wget -O "net.pcsx2.PCSX2.desktop" "https://raw.githubusercontent.com/lucasmz1/pc
 chmod +x ./sharun
 
 # Gerar AppRun com xvfb
-find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t xvfb-run -a -- ./sharun l -p -v -e -k {}
-xvfb-run -a -- ./sharun l -p -v -e -k \
+find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t xvfb-run -a -- ./sharun l -p -v -e -s -k {}
+xvfb-run -a -- ./sharun l -p -v -e -s -k \
 	/usr/lib/x86_64-linux-gnu/dri/* \
 	/usr/lib/x86_64-linux-gnu/lib*CL*.so* \
 	/usr/lib/x86_64-linux-gnu/libvulkan*.so* \
@@ -64,6 +64,7 @@ xvfb-run -a -- ./sharun l -p -v -e -k \
 	/usr/lib/x86_64-linux-gnu/pulseaudio/* \
 	/usr/lib/x86_64-linux-gnu/pipewire-0.3/* \
 	/usr/lib/x86_64-linux-gnu/spa-0.2/*/* || true
+xvfb-run -a -- ./sharun l -p -v -e -s -k /usr/bin/vulkaninfo
 mkdir -p ./shared/lib/qt6 && find . -iname 'plugins' | xargs -i -t -exec mv {} ./shared/lib/qt6/
 find ./shared/lib/home/runner/deps/lib/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
 find ./shared/lib/local/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
