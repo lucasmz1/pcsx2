@@ -54,6 +54,7 @@ xvfb-run -a -- ./sharun l -p -v -e -k \
 	/usr/lib/x86_64-linux-gnu/dri/* \
 	/usr/lib/x86_64-linux-gnu/lib*CL*.so* \
 	/usr/lib/x86_64-linux-gnu/libvulkan*.so* \
+	/usr/lib/x86_64-linux-gnu/libvulkan_* \
     /usr/lib/x86_64-linux-gnu/lib*GL*.so* \
 	/usr/lib/x86_64-linux-gnu/libXss.so* \
 	/usr/lib/x86_64-linux-gnu/gio/modules/* \
