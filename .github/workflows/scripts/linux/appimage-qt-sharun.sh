@@ -54,6 +54,7 @@ xvfb-run -a -- ./sharun l -p -v -e -k \
 	/usr/lib/x86_64-linux-gnu/dri/* \
 	/usr/lib/x86_64-linux-gnu/lib*CL*.so* \
 	/usr/lib/x86_64-linux-gnu/libvulkan*.so* \
+	/usr/lib/x86_64-linux-gnu/libVkLayer*.so* \
 	/usr/lib/x86_64-linux-gnu/libvulkan_* \
     /usr/lib/x86_64-linux-gnu/lib*GL*.so* \
 	/usr/lib/x86_64-linux-gnu/libXss.so* \
@@ -63,7 +64,6 @@ xvfb-run -a -- ./sharun l -p -v -e -k \
 	/usr/lib/x86_64-linux-gnu/pulseaudio/* \
 	/usr/lib/x86_64-linux-gnu/pipewire-0.3/* \
 	/usr/lib/x86_64-linux-gnu/spa-0.2/*/* || true
-find /usr/lib/x86_64-linux-gnu/ -iname 'libvulkan**' | xargs -i -t xvfb-run -a -- ./sharun l -p -v -e -k {}
 mkdir -p ./shared/lib/qt6 && find . -iname 'plugins' | xargs -i -t -exec mv {} ./shared/lib/qt6/
 find ./shared/lib/home/runner/deps/lib/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
 find ./shared/lib/local/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
