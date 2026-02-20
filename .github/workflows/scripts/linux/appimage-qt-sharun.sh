@@ -54,6 +54,7 @@ find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t ./
 	/usr/lib/x86_64-linux-gnu/dri/* \
 	/usr/lib/x86_64-linux-gnu/vdpau/ \
 	/usr/lib/x86_64-linux-gnu/libshaderc.so* \
+	/usr/lib/x86_64-linux-gnu/libqt6svg6.so* \
 	/usr/lib/x86_64-linux-gnu/lib*CL*.so* \
 	/usr/lib/x86_64-linux-gnu/libvulkan*.so* \
 	/usr/lib/x86_64-linux-gnu/libVkLayer*.so* \
