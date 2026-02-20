@@ -52,6 +52,8 @@ chmod +x ./sharun
 find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t ./sharun l -p -v -e -s -k {}
 ./sharun l -p -v -e -s -k \
 	/usr/lib/x86_64-linux-gnu/dri/* \
+	/usr/lib/x86_64-linux-gnu/vdpau/ \
+	/usr/lib/x86_64-linux-gnu/libshaderc.so* \
 	/usr/lib/x86_64-linux-gnu/lib*CL*.so* \
 	/usr/lib/x86_64-linux-gnu/libvulkan*.so* \
 	/usr/lib/x86_64-linux-gnu/libVkLayer*.so* \
