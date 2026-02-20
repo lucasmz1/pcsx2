@@ -41,13 +41,13 @@ find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t ./
 	/usr/lib/x86_64-linux-gnu/pipewire-0.3/* \
 	/usr/lib/x86_64-linux-gnu/spa-0.2/*/* || true
 ./sharun l -p -v -e -s -k /usr/bin/vulkaninfo
-find /usr/lib/x86_64-linux-gnu/qt6/ -iname 'lib**' -print0 | xargs -0 -I{} ./sharun l -p -v -e -s -k {}
-#mkdir -p ./shared/lib/qt6 && find . -iname 'plugins' | xargs -i -t -exec mv {} ./shared/lib/qt6/
+#find /usr/lib/x86_64-linux-gnu/qt6/ -iname 'lib**' -print0 | xargs -0 -I{} ./sharun l -p -v -e -s -k {}
+mkdir -p ./shared/lib/qt6/plugins/ && find . -iname 'plugins' | xargs -i -t -exec mv {} ./shared/lib/qt6/plugins/
 find ./shared/lib/home/runner/deps/lib/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
 find ./shared/lib/local/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
 find . -iname 'home' | xargs -i -t -exec rm -rf {}
 find . -iname 'local' | xargs -i -t -exec rm -rf {}
-#find "${GITHUB_WORKSPACE}" -iname 'qt.conf' -type f | xargs -i -t -exec cp {} "./bin/"
+find "${GITHUB_WORKSPACE}" -iname 'qt.conf' -type f | xargs -i -t -exec cp {} "./bin/"
 ln -rs ./shared/lib/libshaderc.so.1 ./shared/lib/libshaderc_shared.so.1
 ln ./sharun AppRun
 ./sharun -g
