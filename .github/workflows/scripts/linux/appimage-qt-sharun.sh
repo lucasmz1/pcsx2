@@ -42,7 +42,7 @@ find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t ./
 	/usr/lib/x86_64-linux-gnu/spa-0.2/*/* || true
 ./sharun l -p -v -e -s -k /usr/bin/vulkaninfo
 #find /usr/lib/x86_64-linux-gnu/qt6/ -iname 'lib**' -print0 | xargs -0 -I{} ./sharun l -p -v -e -s -k {}
-mkdir -p ./shared/lib/qt6/plugins/ && find . -iname 'plugins' | xargs -i -t -exec mv -f {} ./shared/lib/qt6/
+mkdir -p ./shared/lib/qt6/ && find . -iname 'plugins' | xargs -i -t -exec mv -f {} ./shared/lib/qt6/
 find ./shared/lib/home/runner/deps/lib/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
 find ./shared/lib/local/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
 find . -iname 'home' | xargs -i -t -exec rm -rf {}
