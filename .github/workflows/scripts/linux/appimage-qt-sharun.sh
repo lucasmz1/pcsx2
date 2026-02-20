@@ -52,7 +52,7 @@ chmod +x ./sharun
 find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t ./sharun l -p -v -e -s -k {}
 ./sharun l -p -v -e -s -k \
 	/usr/lib/x86_64-linux-gnu/dri/* \
-	/usr/lib/x86_64-linux-gnu/vdpau/ \
+	/usr/lib/x86_64-linux-gnu/vdpau/* \
 	/usr/lib/x86_64-linux-gnu/libshaderc.so* \
 	/usr/lib/x86_64-linux-gnu/libQt6Svg.so* \
 	/usr/lib/x86_64-linux-gnu/lib*CL*.so* \
@@ -68,7 +68,7 @@ find ${GITHUB_WORKSPACE}/ -type f -iname 'pcsx2-qt' -executable | xargs -i -t ./
 	/usr/lib/x86_64-linux-gnu/pipewire-0.3/* \
 	/usr/lib/x86_64-linux-gnu/spa-0.2/*/* || true
 ./sharun l -p -v -e -s -k /usr/bin/vulkaninfo
-find ${GITHUB_WORKSPACE}/ -iname 'libshaderc_**' -print0 | xargs -0 -I{} ./sharun -p -v -e -s -k {}
+find /usr/lib/x86_64-linux-gnu/qt6/ -iname 'lib**' -print0 | xargs -0 -I{} ./sharun l -p -v -e -s -k {}
 mkdir -p ./shared/lib/qt6 && find . -iname 'plugins' | xargs -i -t -exec mv {} ./shared/lib/qt6/
 find ./shared/lib/home/runner/deps/lib/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
 find ./shared/lib/local/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
