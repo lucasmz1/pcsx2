@@ -47,7 +47,7 @@ find ./shared/lib/home/runner/deps/lib/ -iname 'lib*.so*' -print0 | xargs -0 -I{
 find ./shared/lib/local/ -iname 'lib*.so*' -print0 | xargs -0 -I{} cp -a {} ./shared/lib/
 find . -iname 'home' | xargs -i -t -exec rm -rf {}
 find . -iname 'local' | xargs -i -t -exec rm -rf {}
-find "${GITHUB_WORKSPACE}" -iname 'qt.conf' -type f | xargs -i -t -exec cp {} "./bin/"
+#find "${GITHUB_WORKSPACE}" -iname 'qt.conf' -type f | xargs -i -t -exec cp {} "./bin/"
 ln -rs ./shared/lib/libshaderc.so.1 ./shared/lib/libshaderc_shared.so.1
 ln ./sharun AppRun
 ./sharun -g
