@@ -183,6 +183,12 @@ jobs:
             -DDISABLE_ADVANCE_SIMD=TRUE \
             -DUSE_LINKED_FFMPEG=ON \
             -DCMAKE_DISABLE_PRECOMPILE_HEADERS=ON \
+            -DUSE_ASAN=OFF \
+            -DUSE_BACKTRACE=OFF \
+            -DUSE_SANITIZERS=OFF \
+            -DUSE_VULKAN=ON \
+            -DWAYLAND_API=ON \
+            -DX11_API=ON \
             $ADDITIONAL_CMAKE_ARGS
 
       - name: Build PCSX2
