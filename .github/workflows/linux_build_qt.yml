@@ -101,15 +101,15 @@ jobs:
 
       - name: Install Packages
         run: |
-          sudo add-apt-repository ppa:kisak/kisak-mesa -y
-          sudo apt update
+          #sudo add-apt-repository ppa:kisak/kisak-mesa -y
+          #sudo apt update
           #sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream -y
           #sudo apt update
           #sudo add-apt-repository ppa:ubuntu-toolchain-r/ppa -y
           #sudo apt update
           #sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
           #sudo apt update
-          wget -c 'https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip'
+          wget -c 'https://github.com/ninja-build/ninja/releases/download/v1.13.2/ninja-linux.zip'
           unzip ninja-linux.zip
           sudo mv ninja /usr/bin/
           wget -c 'https://github.com/mesonbuild/meson/releases/download/1.6.0/meson-1.6.0.tar.gz'
@@ -175,11 +175,13 @@ jobs:
             -DCMAKE_PREFIX_PATH="$HOME/deps" \
             -DCMAKE_C_COMPILER=clang-17 \
             -DCMAKE_CXX_COMPILER=clang++-17 \
-            -DCMAKE_EXE_LINKER_FLAGS_INIT="-fuse-ld=lld" \
-            -DCMAKE_MODULE_LINKER_FLAGS_INIT="-fuse-ld=lld" \
+            -DCMAKE_EXE_LINKER_FLAGS_INIT="-fuse-ld=lld -lrt" \
+            -DCMAKE_MODULE_LINKER_FLAGS_INIT="-fuse-ld=lld -lrt" \
             -DCMAKE_C_COMPILER_LAUNCHER=ccache \
             -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
             -DENABLE_SETCAP=OFF \
+            -DUSE_SYSTEM_FMT=OFF \
+            -DENABLE_TESTS=OFF \
             -DDISABLE_ADVANCE_SIMD=TRUE \
             -DUSE_LINKED_FFMPEG=ON \
             -DCMAKE_DISABLE_PRECOMPILE_HEADERS=ON \
