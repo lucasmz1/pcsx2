@@ -169,26 +169,21 @@ jobs:
         env:
           ADDITIONAL_CMAKE_ARGS: ${{ inputs.cmakeflags }}
         run: |
-          cmake -B build -G Ninja \
-            -DENABLE_SSE2=ON \
-            -DCMAKE_C_FLAGS="-march=x86-64 -mtune=generic" \
-            -DCMAKE_CXX_FLAGS="-march=x86-64 -mtune=generic" \
+            cmake -B build -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
             -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON \
             -DCMAKE_PREFIX_PATH="$HOME/deps" \
-            -DCMAKE_C_COMPILER=clang-17 \
-            -DCMAKE_CXX_COMPILER=clang++-17 \
-            -DCMAKE_EXE_LINKER_FLAGS_INIT="-fuse-ld=lld -lrt" \
-            -DCMAKE_MODULE_LINKER_FLAGS_INIT="-fuse-ld=lld -lrt" \
+            -DCMAKE_C_COMPILER=clang-21 \
+            -DCMAKE_CXX_COMPILER=clang++-21 \
+            -DCMAKE_EXE_LINKER_FLAGS_INIT="-fuse-ld=lld" \
+            -DCMAKE_MODULE_LINKER_FLAGS_INIT="-fuse-ld=lld" \
+            -DCMAKE_C_COMPILER_LAUNCHER=ccache \
             -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-            -DENABLE_SETCAP=ON \
-            -DCMAKE_BUILD_STRIP=ON \
-            -DUSE_SYSTEM_FMT=OFF \
-            -DENABLE_TESTS=OFF \
-            -DXDG_STD=ON \
-            -DDISABLE_ADVANCE_SIMD=ON \
-            $ADDITIONAL_CMAKE_ARGS \
-            -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install
+            -DENABLE_SETCAP=OFF \
+            -DDISABLE_ADVANCE_SIMD=TRUE \
+            -DUSE_LINKED_FFMPEG=ON \
+            -DCMAKE_DISABLE_PRECOMPILE_HEADERS=ON \
+            $ADDITIONAL_CMAKE_ARGS
 
       - name: Build PCSX2
         working-directory: build
