@@ -51,6 +51,7 @@ find "${GITHUB_WORKSPACE}" -iname 'qt.conf' -type f | xargs -i -t -exec cp {} ".
 ln -rs ./shared/lib/libshaderc.so.1 ./shared/lib/libshaderc_shared.so.1
 ln ./sharun AppRun
 ./sharun -g
+echo 'QT_QPA_PLATFORM=xcb' >> .env
 
 cd ..
 
